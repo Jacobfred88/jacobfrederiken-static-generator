@@ -1,0 +1,23 @@
+{
+  "name": "site",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "parcel build src/index.njk --no-content-hash --no-minify",
+    "start": "parcel src/index.njk"
+  },
+  "dependencies": {
+    "@dogstudio/highway": "^2.1.3",
+    "gsap": "^3.0.1",
+    "nunjucks": "^3.2.0",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-bundle-manifest": "^0.2.0",
+    "parcel-plugin-nunjucks": "^2.2.0",
+    "parcel-plugin-purgecss": "^2.1.3"
+  },
+  "devDependencies": {
+    "sass": "^1.23.7",
+    "tailwindcss": "^1.1.3"
+  }
+}
