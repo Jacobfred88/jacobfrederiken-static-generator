@@ -1,0 +1,20 @@
+html {
+    font-size: calc(16*100vw/375);
+    height: 100%;
+
+    @screen sm {
+        font-size: calc(16*100vw/720);
+    }
+
+    @screen lg {
+        font-size: calc(16*100vw/1540);
+    }
+
+    @screen display {
+         font-size: calc(16*100vw/1940);
+    }
+}
+
+body {
+    @apply .font-sans .font-normal .bg-black .text-white .antialiased;
+}

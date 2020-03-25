@@ -1,5 +1,9 @@
 @tailwind base;
 
+@import './common/font.scss';
+@import './common/global.scss';
+@import './common/grid.scss';
+
 @tailwind components;
 
 @tailwind utilities;
