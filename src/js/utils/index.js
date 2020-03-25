@@ -54,3 +54,16 @@ export const getTranslate = (el) => {
 }
 
 
+export const hasAttrInTree = (element, attr) => {
+
+    if(!element) return;
+    do {
+        if (element.classList && element.hasAttribute(attr)) {
+            return element;
+        }
+        element = element.parentNode;
+    } while (element);
+        return false;
+}
+
+
