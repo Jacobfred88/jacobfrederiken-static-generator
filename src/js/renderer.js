@@ -1,10 +1,21 @@
 import Highway from '@dogstudio/highway';
+import LazyLoad from 'vanilla-lazyload';
 
 class CustomRenderer extends Highway.Renderer {
-  // Hooks/methods
+  constructor(props) {
+    super(props);
+    this.lazyLoadInstance = new LazyLoad({
+        elements_selector: '[data-lazy]',
+        threshold: 1000,
+    });
+  }
   onEnter() {  }
   onLeave() {  }
-  onEnterCompleted() { }
+  
+  onEnterCompleted() { 
+    this.lazyLoadInstance.update();
+  }
+
   onLeaveCompleted() { }
 }
 
