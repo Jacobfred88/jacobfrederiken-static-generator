@@ -2,11 +2,11 @@ import Highway from '@dogstudio/highway';
 import Renderer from './renderer.js';
 import Transition from './transition.js';
 import {addDetectClasses} from './utils/detect';
-
+import Prefetch from './components/prefetch';
 
 addDetectClasses();
 
-new Highway.Core({
+const H = new Highway.Core({
     renderers: {
         global: Renderer
     },
@@ -14,3 +14,5 @@ new Highway.Core({
         global: Transition
     }
 });
+
+new Prefetch(H);

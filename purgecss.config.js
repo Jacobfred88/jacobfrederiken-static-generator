@@ -1,5 +1,5 @@
 module.exports = {
-    content: ["src/**/*.html"],
+    content: ["src/**/*.njk"],
     tailwind: true,
     whitelistPatterns: [/^is-/,/^is-non/,/^flickity-/],
   }
