@@ -9,6 +9,10 @@ var lazyLoadInstance;
 
 export const onReady = ()=> {
 
+    // if ('scrollRestoration' in history) {
+    //     history.scrollRestoration = 'manual';
+    // }
+
     // scroll = new ASScroll({
     //     'element': '[data-scroll-container]',
     //     disableResize: false

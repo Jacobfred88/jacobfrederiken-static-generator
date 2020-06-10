@@ -9,7 +9,6 @@ class Transition extends Highway.Transition {
         // Remove Old View
         from.remove();
 
-        
         // Animation
         gsap.set(to, {
             opacity: 0

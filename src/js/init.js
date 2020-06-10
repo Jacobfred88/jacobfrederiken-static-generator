@@ -2,10 +2,6 @@ import "./routing";
 import store from './global/store';
 import {onReady,onResize} from './global/renderer';
 
-if ('scrollRestoration' in history) {
-	history.scrollRestoration = 'manual';
-}
-
 document.addEventListener("DOMContentLoaded", () => {
 	
 	store.windowWidth = window.innerWidth;
