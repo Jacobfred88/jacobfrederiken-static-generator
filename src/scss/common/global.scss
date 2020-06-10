@@ -1,19 +1,24 @@
 html {
-    font-size: calc(16*100vw/375);
-    height: 100%;
+    // font-size: calc(16*100vw/375);
+    // height: 100%;
 
-    @screen sm {
-        font-size: calc(16*100vw/720);
-    }
+    // @screen sm {
+    //     font-size: calc(16*100vw/720);
+    // }
 
-    @screen lg {
-        font-size: calc(16*100vw/1540);
-    }
+    // @screen lg {
+    //     font-size: calc(16*100vw/1540);
+    // }
 
-    @screen display {
-         font-size: calc(16*100vw/1940);
-    }
+    // @screen display {
+    //      font-size: calc(16*100vw/1940);
+    // }
 }
+
+html {
+  font-size: calc(16px + (22 - 16) * ((100vw - 370px) / (2560 - 370)));
+}
+
 
 body {
     @apply .font-sans .font-normal .bg-black .text-white .antialiased;
@@ -27,13 +32,14 @@ body {
 
     .is-desktop & {
       height: 100vh;
+      min-height:100vh;
     }
   }
 }
 
 [data-lazy] {
   opacity: 0;
-  transition:opacity 0.35s ease-in-out;
+  // transition:opacity 0.35s ease-in-out;
   &[data-ll-status=loaded] {
     opacity: 1;
   }

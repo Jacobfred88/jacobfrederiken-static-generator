@@ -1,25 +1,45 @@
+.container {
+
+    width:100%;
+    padding-left:rem(16px);
+    padding-right:rem(16px);
+
+    @screen md {
+        padding-left:rem(32px);
+        padding-right:rem(32px);
+    }
+    
+    @screen xl {
+        padding-left:rem(64px);
+        padding-right:rem(64px);
+    }
+    
+    &--full {
+        max-width:100%;
+    }
+}
+
 @responsive {
-    .container {
-        @apply .px-4 .w-full;
-        
-        &--full {
-            max-width:100%;
+
+    .row {
+        display: flex;
+        flex-wrap:wrap;
+        flex-grow: 1;
+    
+        margin-left:rem(-8px);
+        margin-right:rem(-8px);
+        @screen md {
+            margin-left:rem(-16px);
+            margin-right:rem(-16px);
         }
     }
 }
 
-@responsive {
-    .row {
-        @apply
-            .flex
-            .flex-wrap
-            .-mx-4;
-    }
-}
-
-@responsive {
-    .col {
-        @apply
-            .px-4;
+.col {
+    padding-left:rem(8px);
+    padding-right:rem(8px);
+    @screen md {
+        padding-left:rem(16px);
+        padding-right:rem(16px);
     }
 }
