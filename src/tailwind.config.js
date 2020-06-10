@@ -59,4 +59,14 @@ module.exports = {
     corePlugins: {
       container: false,
     },
+    purge: {
+      options: {
+        whitelistPatterns: [/^is-/,/^is-non/,/^tl-/,/^has-/, /^flickity--/],
+        whitelist: ['opacity-50', 'pointer-events-none'],
+      },
+      content: [
+        './src/**/*.html', 
+        './src/**/*.njk',
+      ],
+    }
   }

@@ -35,7 +35,6 @@ export const pad = (num, size) => {
     return s;
 }
 
-
 export const getTranslate = (el) => {
     const translate = {}
     if(!window.getComputedStyle) return;
@@ -53,7 +52,6 @@ export const getTranslate = (el) => {
     return translate;
 }
 
-
 export const hasAttrInTree = (element, attr) => {
 
     if(!element) return;
@@ -65,5 +63,3 @@ export const hasAttrInTree = (element, attr) => {
     } while (element);
         return false;
 }
-
-

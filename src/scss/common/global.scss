@@ -20,21 +20,21 @@ body {
 }
 
 @responsive {
-    /* autoprefixer: off */
-    .fill-available {
-      min-height:100vh;
-      min-height: -webkit-fill-available;
-  
-      .is-desktop & {
-        height: 100vh;
-      }
+  /* autoprefixer: off */
+  .fill-available {
+    min-height:100vh;
+    min-height: -webkit-fill-available;
+
+    .is-desktop & {
+      height: 100vh;
     }
   }
-  
-  [data-lazy] {
-    opacity: 0;
-    transition:opacity 0.35s ease-in-out;
-    &[data-ll-status=loaded] {
-      opacity: 1;
-    }
+}
+
+[data-lazy] {
+  opacity: 0;
+  transition:opacity 0.35s ease-in-out;
+  &[data-ll-status=loaded] {
+    opacity: 1;
   }
+}

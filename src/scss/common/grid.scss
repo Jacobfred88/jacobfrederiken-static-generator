@@ -1,20 +1,25 @@
-.container {
-
-    @apply .px-4 .w-full;
-    
-    &--full {
-        max-width:100%;
+@responsive {
+    .container {
+        @apply .px-4 .w-full;
+        
+        &--full {
+            max-width:100%;
+        }
     }
 }
 
-.row {
-    @apply
-        .flex
-        .flex-wrap
-        .-mx-4;
+@responsive {
+    .row {
+        @apply
+            .flex
+            .flex-wrap
+            .-mx-4;
+    }
 }
 
-.col {
-    @apply
-        .px-4;
+@responsive {
+    .col {
+        @apply
+            .px-4;
+    }
 }

@@ -1,22 +1,27 @@
 import Highway from '@dogstudio/highway';
-import LazyLoad from 'vanilla-lazyload';
-
+import Component from './components/component';
 class CustomRenderer extends Highway.Renderer {
+
   constructor(props) {
     super(props);
-    this.lazyLoadInstance = new LazyLoad({
-        elements_selector: '[data-lazy]',
-        threshold: 1000,
-    });
+
+    this.components = [];
   }
-  onEnter() {  }
+  
+  onEnter() { 
+
+    this.components.push(new Component());
+  }
+  
   onLeave() {  }
   
-  onEnterCompleted() { 
-    this.lazyLoadInstance.update();
-  }
+  onEnterCompleted() { }
+  onLeaveCompleted() { 
 
-  onLeaveCompleted() { }
+    this.components.map(component => {
+      component.destroy();
+    });
+  }
 }
 
 // Don`t forget to export your renderer

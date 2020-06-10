@@ -21,9 +21,9 @@
 
 <body>
   {% include "./header.njk" %}
-  <main data-router-wrapper>
-    <div data-router-view="global">
-      {% block body %}{% endblock %}
+  <main data-router-wrapper data-scroll-container>
+    <div data-router-view="global" data-scroll>
+        {% block body %}{% endblock %}
     </div>
   </main>
   
