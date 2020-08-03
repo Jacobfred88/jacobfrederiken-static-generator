@@ -1,11 +1,30 @@
 // import ASScroll from '@ashthornton/asscroll';
 const Browserizr = require('browserizr').default;
 import LazyLoad from 'vanilla-lazyload';
-import { listen } from 'quicklink';
 import store from './store';
+import WaitCursor from '../utils/waitCursor';
 
 var lazyLoadInstance;
+const waitCursor = new WaitCursor(300);
+
+
 // var scroll;
+
+const setCurrentLinks = () => {
+    const links = document.querySelectorAll('a');
+    
+    for (let i = 0; i < links.length; i++) {
+        const link = links[i];
+    
+        // Clean class
+        link.classList.remove('is-current-link');
+    
+        // Active link
+        if (link.href === location.href) {
+          link.classList.add('is-current-link');
+        }
+      }
+}
 
 export const onReady = ()=> {
 
@@ -19,6 +38,8 @@ export const onReady = ()=> {
     // });
 
     // scroll.enable();
+
+    setCurrentLinks();
 
     const classes = Browserizr.detect().cssClasses(['Mobile', 'Desktop','IE11','IOS','Chrome','Safari','Android','Edge','IPhone5','IPad']);
     
@@ -38,8 +59,6 @@ export const onReady = ()=> {
         threshold: 1000,
     });
 
-    listen();
-
     let vh = store.windowHeight * 0.01;
 
 	document.body.style.setProperty('--vh', `${vh}px`);
@@ -54,12 +73,13 @@ export const onResize = () => {
     let vh = store.windowHeight * 0.01;
     document.body.style.setProperty('--vhu', `${vh}px`);
 
-    scroll.onResize( store.windowHeight, store.windowHeight );
+    // scroll.onResize( store.windowHeight, store.windowHeight );
 }
 
 
 export const onLeave = (from, trigger, location)=> {
     // scroll.disable();
+    waitCursor.start();
 };
 
 /*
@@ -71,9 +91,9 @@ export const onLeave = (from, trigger, location)=> {
  */
 export const onEnter = (to, trigger, location)=>{
     lazyLoadInstance.update();
-    // scroll.enable(false, true, to.view);
-
-    
+    setCurrentLinks();
+    waitCursor.end();
+    // scroll.enable(false, true, to.view);  
 };
 
 /*
@@ -86,11 +106,6 @@ export const onEnter = (to, trigger, location)=>{
 export const onEnterCompleted = (from, to, trigger, location)=>{
     
     // scroll.enable(true, true, to.view);
-
-    listen({
-        el: to.view,
-    });
-
     if(store.firstLoad) {
         store.firstLoad = false;
     }

@@ -14,7 +14,6 @@ export const H = new Highway.Core({
 
 H.on("NAVIGATE_OUT", ({ from, trigger, location })=>{
     onLeave(from, trigger, location);
-    
 });
 
 H.on("NAVIGATE_IN", ({ to, trigger, location })=>{

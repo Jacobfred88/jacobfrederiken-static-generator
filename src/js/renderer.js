@@ -10,7 +10,9 @@ class CustomRenderer extends Highway.Renderer {
   
   onEnter() { 
 
-    this.components.push(new Component());
+    // this.components.push(new Component());
+
+    new Component()
   }
   
   onLeave() {  }
@@ -18,9 +20,9 @@ class CustomRenderer extends Highway.Renderer {
   onEnterCompleted() { }
   onLeaveCompleted() { 
 
-    this.components.map(component => {
-      component.destroy();
-    });
+    // this.components.map(component => {
+    //   component.destroy();
+    // });
   }
 }
 
