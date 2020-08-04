@@ -1,3 +1,7 @@
+const pxToRem = (num) => {
+  return `${num/16}rem`;
+};
+
 module.exports = {
     theme: {
       screens: {
@@ -41,7 +45,7 @@ module.exports = {
         '3xl': '1.875rem',
         '4xl': '2.25rem',
         '5xl': '3rem',
-        '6xl': '4rem',
+        '6xl': [pxToRem(64), 1.2],
       },
       lineHeight: {
         none: '1',
