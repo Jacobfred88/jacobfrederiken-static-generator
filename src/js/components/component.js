@@ -1,9 +1,11 @@
 import BaseComponent from "./baseComponent";
 import store from '../global/store';
-
+import {select, selectAll} from '../utils'
 export default class Components extends BaseComponent {
-    constructor() {
+    constructor(elm) {
         super();
+
+        this.root = elm;
     }
 
     onResize() {

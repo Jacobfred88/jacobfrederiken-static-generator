@@ -4,6 +4,15 @@ import LazyLoad from 'vanilla-lazyload';
 import store from './store';
 import WaitCursor from '../utils/waitCursor';
 
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from 'gsap';
+
+import ScrollToPlugin from '../utils/gsap-shockingly-green/esm/ScrollToPlugin';
+
+gsap.registerPlugin(ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger);
+
+
 var lazyLoadInstance;
 const waitCursor = new WaitCursor(300);
 

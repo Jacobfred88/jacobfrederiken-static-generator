@@ -65,12 +65,15 @@ module.exports = {
     },
     purge: {
       options: {
-        whitelistPatterns: [/^is-/,/^is-non/,/^tl-/,/^has-/, /^flickity--/],
+        whitelistPatterns: [/^is-/,/^is-non/,/^tl-/,/^has-/, /^flickity--/,/^fx-/],
         whitelist: ['opacity-50', 'pointer-events-none'],
       },
       content: [
         './src/**/*.html', 
         './src/**/*.njk',
       ],
+    },
+    future: {
+      removeDeprecatedGapUtilities: true,
     }
   }

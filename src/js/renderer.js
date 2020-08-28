@@ -11,8 +11,9 @@ class CustomRenderer extends Highway.Renderer {
   onEnter() { 
 
     // this.components.push(new Component());
-
-    new Component()
+    this.properties.renderer.then(() => {
+      new Component()
+    });
   }
   
   onLeave() {  }

@@ -12,6 +12,9 @@ export const H = new Highway.Core({
     }
 });
 
+
+const exclude = ['/cart'];
+
 H.on("NAVIGATE_OUT", ({ from, trigger, location })=>{
     onLeave(from, trigger, location);
 });
@@ -22,4 +25,13 @@ H.on("NAVIGATE_IN", ({ to, trigger, location })=>{
 
 H.on("NAVIGATE_END", ({ from, to, trigger, location })=>{
     onEnterCompleted(from, to, trigger, location);
+
+    H.cache.forEach((value, key, map) => {
+        exclude.forEach(path => {
+            if(new URL(key).pathname == path ) {
+                H.cache.delete(key);
+            }
+        })
+    });
+
 });

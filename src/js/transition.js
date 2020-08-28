@@ -19,7 +19,7 @@ class Transition extends Highway.Transition {
 
         gsap.to(to,{
             opacity: 1,
-            duration: 0.5,
+            duration: 0.55,
             onComplete: () => done()
             }
         );
@@ -29,7 +29,7 @@ class Transition extends Highway.Transition {
          
         gsap.to(from, {
             opacity: 0,
-            duration: 0.5,
+            duration: 0.55,
             onComplete: () => done()
           }
         );
