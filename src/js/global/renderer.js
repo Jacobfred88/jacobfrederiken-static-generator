@@ -3,6 +3,7 @@ const Browserizr = require('browserizr').default;
 import LazyLoad from 'vanilla-lazyload';
 import store from './store';
 import WaitCursor from '../utils/waitCursor';
+import Cursor from '../components/cursor';
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from 'gsap';
@@ -49,6 +50,8 @@ export const onReady = ()=> {
     // scroll.enable();
 
     setCurrentLinks();
+
+    new Cursor();
 
     const classes = Browserizr.detect().cssClasses(['Mobile', 'Desktop','IE11','IOS','Chrome','Safari','Android','Edge','IPhone5','IPad']);
     
