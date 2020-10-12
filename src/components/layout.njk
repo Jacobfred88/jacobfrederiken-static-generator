@@ -18,13 +18,15 @@
 
 </head>
 
-<body class="debug">
+<body>
   {% include "./header.njk" %}
   <main data-router-wrapper data-scroll-container>
     <div data-router-view="global" data-scroll>
         {% block body %}{% endblock %}
     </div>
   </main>
+
+  <div class="debug" onclick="console.log(this.classList.toggle('grid'))"></div>
   
   <script src="js/main.js"></script>
 
