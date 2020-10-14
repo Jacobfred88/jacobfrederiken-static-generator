@@ -1,4 +1,4 @@
-// import ASScroll from '@ashthornton/asscroll';
+import ASScroll from '@ashthornton/asscroll';
 const Browserizr = require('browserizr').default;
 import LazyLoad from 'vanilla-lazyload';
 import store from './store';
@@ -16,9 +16,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 var lazyLoadInstance;
 const waitCursor = new WaitCursor(300);
-
-
-// var scroll;
 
 const setCurrentLinks = () => {
     const links = document.querySelectorAll('a');
@@ -42,12 +39,12 @@ export const onReady = ()=> {
     //     history.scrollRestoration = 'manual';
     // }
 
-    // scroll = new ASScroll({
-    //     'element': '[data-scroll-container]',
-    //     disableResize: false
-    // });
+    window.scroll = new ASScroll({
+        'element': '[data-scroll-container]',
+        disableResize: false
+    });
 
-    // scroll.enable();
+    window.scroll.enable();
 
     setCurrentLinks();
 
@@ -85,12 +82,12 @@ export const onResize = () => {
     let vh = store.windowHeight * 0.01;
     document.body.style.setProperty('--vhu', `${vh}px`);
 
-    // scroll.onResize( store.windowHeight, store.windowHeight );
+    window.scroll.onResize( store.windowHeight, store.windowHeight );
 }
 
 
 export const onLeave = (from, trigger, location)=> {
-    // scroll.disable();
+    window.scroll.disable();
     waitCursor.start();
 };
 
@@ -105,7 +102,7 @@ export const onEnter = (to, trigger, location)=>{
     lazyLoadInstance.update();
     setCurrentLinks();
     waitCursor.end();
-    // scroll.enable(false, true, to.view);  
+    window.scroll.enable(false, true, to.view);  
 };
 
 /*
@@ -116,8 +113,7 @@ export const onEnter = (to, trigger, location)=>{
  *	event fires.
  */
 export const onEnterCompleted = (from, to, trigger, location)=>{
-    
-    // scroll.enable(true, true, to.view);
+
     if(store.firstLoad) {
         store.firstLoad = false;
     }

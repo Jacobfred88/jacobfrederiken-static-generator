@@ -22,7 +22,9 @@
   {% include "./header.njk" %}
   <main data-router-wrapper data-scroll-container>
     <div data-router-view="global" data-scroll>
-        {% block body %}{% endblock %}
+        <div class="asscroll-container">
+          {% block body %}{% endblock %}
+        </div>
     </div>
   </main>
 
