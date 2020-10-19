@@ -10,11 +10,11 @@ export default class Components extends BaseComponent {
     }
 
     onScrollerRaf({ scrollPos, smoothScrollPos }) {
-        console.log('scroll Raf',scrollPos,smoothScrollPos );
+        //console.log('scroll Raf',scrollPos,smoothScrollPos );
     }
 
     onPreloadCompleted() {
-        console.log('onPreloadCompleted');
+        // console.log('onPreloadCompleted');
 
         Array.from(document.querySelectorAll('[data-plane]')).map(elm => {
             gsap.from(elm, {
@@ -22,17 +22,17 @@ export default class Components extends BaseComponent {
                 trigger: elm,
                 scrub:true,
                 end: "center center",
-              }, // start the animation when ".box" enters the viewport (once)
+              },
               scale:0.5,
             });
           });
     }
 
     onResize() {
-        console.log('resize',store);
+        // console.log('resize',store);
     }
 
     onDestroy() {
-        console.log('destory!');
+        // console.log('destory!');
     }
 }

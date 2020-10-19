@@ -8,7 +8,7 @@
     "start": "parcel src/index.njk"
   },
   "dependencies": {
-    "@ashthornton/asscroll": "^1.5.9",
+    "@ashthornton/asscroll": "^1.7.1",
     "@dogstudio/highway": "^2.2.1",
     "browserizr": "^3.2.5",
     "gsap": "^3.5.1",
@@ -20,7 +20,7 @@
     "vanilla-lazyload": "^17.1.2"
   },
   "devDependencies": {
-    "sass": "^1.26.10",
-    "tailwindcss": "^1.7.5"
+    "sass": "^1.27.0",
+    "tailwindcss": "^1.9.4"
   }
 }

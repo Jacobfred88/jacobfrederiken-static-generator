@@ -14,14 +14,14 @@ export default class Components extends BaseComponent {
     }
 
     onPreloadCompleted() {
-        console.log('onPreloadCompleted');
+        // console.log('onPreloadCompleted');
     }
 
     onResize() {
-        console.log('resize',store);
+        // console.log('resize',store);
     }
 
     onDestroy() {
-        console.log('destory!');
+        // console.log('destory!');
     }
 }
