@@ -1,5 +1,4 @@
 import Highway from '@dogstudio/highway';
-import Quicklink from 'quicklink/dist/quicklink.mjs';
 import Renderer from './renderer.js';
 import Transition from './transition.js';
 import {onLeave, onEnter, onEnterCompleted} from './global/renderer';
@@ -27,10 +26,6 @@ H.on("NAVIGATE_IN", ({ to, trigger, location })=>{
 H.on("NAVIGATE_END", ({ from, to, trigger, location })=>{
     onEnterCompleted(from, to, trigger, location);
 
-    Quicklink({
-        el: to.view
-    });
-
     H.cache.forEach((value, key, map) => {
         exclude.forEach(path => {
             if(new URL(key).pathname == path ) {
@@ -38,5 +33,4 @@ H.on("NAVIGATE_END", ({ from, to, trigger, location })=>{
             }
         })
     });
-
 });

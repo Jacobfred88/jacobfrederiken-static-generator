@@ -11,4 +11,5 @@ export default {
     'isSafari' : null,
     'isIe11' : null,
     'isChrome' : null,
+    'scroller' : null,
 }

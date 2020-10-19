@@ -1,15 +1,14 @@
 import {lerp,hasAttrInTree,selectAll} from '../utils';
 import {H} from '../routing';
+import store from '../global/store';
 
 class Cursor {
   constructor() {
+      
+      this.updateElements = this.updateElements.bind(this);
+      this.cursor = document.querySelector('[data-cursor]');
 
-      // if(!document.body.hasAttribute('is-mobile')) {
-
-        this.updateElements = this.updateElements.bind(this);
-        this.cursor = document.querySelector('[data-cursor]');
-        // this.text = this.cursor.querySelector('[data-cursor-text]');
-
+      if(!store.isMobile) {
         this.x = 0;
         this.y = 0;
         this.vx = 0;
@@ -24,9 +23,9 @@ class Cursor {
 
         H.on('NAVIGATE_IN', this.updateElements);
 
-      // } else {
-      //   this.cursor.classList.add('hidden');
-      // }
+      } else {
+         this.cursor.classList.add('hidden');
+      }
 
   }
 
@@ -54,7 +53,6 @@ class Cursor {
 
     // var currentElm = document.elementFromPoint(this.x,this.y);
 
-  
     this.cursor.style.transform = `translate3d(${this.vx}px,${this.vy}px,0px)`;
   }
 

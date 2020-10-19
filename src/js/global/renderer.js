@@ -1,9 +1,12 @@
-import ASScroll from '@ashthornton/asscroll';
+// import ASScroll from '@ashthornton/asscroll';
 const Browserizr = require('browserizr').default;
 import LazyLoad from 'vanilla-lazyload';
 import store from './store';
 import WaitCursor from '../utils/waitCursor';
 import Cursor from '../components/cursor';
+import Preloader from '../utils/preloader';
+import CustomScroll from '../utils/customScroll';
+import Menu from '../components/menu';
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from 'gsap';
@@ -30,26 +33,11 @@ const setCurrentLinks = () => {
         if (link.href === location.href) {
           link.classList.add('is-current-link');
         }
-      }
+    }
 }
 
 export const onReady = ()=> {
-
-    // if ('scrollRestoration' in history) {
-    //     history.scrollRestoration = 'manual';
-    // }
-
-    window.scroll = new ASScroll({
-        'element': '[data-scroll-container]',
-        disableResize: false
-    });
-
-    window.scroll.enable();
-
-    setCurrentLinks();
-
-    new Cursor();
-
+    
     const classes = Browserizr.detect().cssClasses(['Mobile', 'Desktop','IE11','IOS','Chrome','Safari','Android','Edge','IPhone5','IPad']);
     
     classes.map(detectClass => {
@@ -62,10 +50,17 @@ export const onReady = ()=> {
     store.isSafari = Browserizr.detect().isSafari();
     store.isIe11 = Browserizr.detect().isIE11();
     store.isChrome = Browserizr.detect().isChrome();
+    
+    new CustomScroll();
+    new Preloader();
+    new Cursor();
+    new Menu();
+    
+    setCurrentLinks();
+
 
     lazyLoadInstance = new LazyLoad({
         elements_selector: '[data-lazy]',
-        threshold: 1000,
     });
 
     let vh = store.windowHeight * 0.01;
@@ -78,16 +73,16 @@ export const onReady = ()=> {
 export const onResize = () => {
     window.dispatchEvent(new CustomEvent('onResize'));
 
-
     let vh = store.windowHeight * 0.01;
     document.body.style.setProperty('--vhu', `${vh}px`);
-
-    window.scroll.onResize( store.windowHeight, store.windowHeight );
+    
+    if(store.scroller) {
+        store.scroller.onResize( store.windowHeight, store.windowHeight );
+    }
 }
 
 
 export const onLeave = (from, trigger, location)=> {
-    window.scroll.disable();
     waitCursor.start();
 };
 
@@ -102,7 +97,6 @@ export const onEnter = (to, trigger, location)=>{
     lazyLoadInstance.update();
     setCurrentLinks();
     waitCursor.end();
-    window.scroll.enable(false, true, to.view);  
 };
 
 /*

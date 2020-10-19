@@ -20,15 +20,21 @@
 
 <body>
   {% include "./header.njk" %}
-  <main data-router-wrapper data-scroll-container>
-    <div data-router-view="global" data-scroll>
-        <div class="asscroll-container">
-          {% block body %}{% endblock %}
-        </div>
-    </div>
-  </main>
+  <div data-scroll-container>
+    <main data-router-wrapper>
+      <div data-router-view="global">
+          <div data-scroll-inner class="js-scroll">
+            {% block body %}{% endblock %}
+          </div>
+      </div>
+    </main>
+  </div>
 
   <div data-cursor class="w-6 h-6 -mt-3 -ml-3 z-50 bg-white fixed top-0 left-0 rounded-full pointer-events-none"></div>
+  <div data-sail class="fixed inset-0 w-full h-full bg-black flex items-center justify-center z-999 overflow-hidden transform translate-y-full"></div>
+  <div data-preloader class="fixed inset-0 w-full h-full bg-black flex items-center justify-center z-999 overflow-hidden">
+    <div class="w-8 h-4 bg-white animate-bounce"></div>
+  </div>
   <div class="debug" onclick="console.log(this.classList.toggle('grid'))"></div>
   
   <script src="js/main.js"></script>

@@ -1,3 +1,17 @@
-<header class="fixed top-0 left-0 w-full container py-6 bg-black text-white z-50">
+<header class="fixed top-0 left-0 w-full container py-6 bg-black text-white z-50 flex items-center justify-between">
     <a href="/">Logo</a>
+    <div class="w-6 h-4 flex flex-col justify-between cursor-pointer" data-menu-toggle>
+        <span class="w-fill border-b border-white block"></span>
+        <span class="w-fill border-b border-white block"></span>
+        <span class="w-fill border-b border-white block"></span>
+    </div>
 </header>
+
+<div class="fixed inset-0 bg-black z-40 h-full" data-menu-overlay>
+
+    <ul class="text-white text-3xl flex flex-col items-center justify-center h-full uppercase">
+        <li class="block"><a href="/">Home</a></li>
+        <li class="block"><a href="/page.njk">Page</a></li>
+    </ul>
+</div>
+

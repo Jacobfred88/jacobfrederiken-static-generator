@@ -1,5 +1,7 @@
 import Highway from '@dogstudio/highway';
 import Component from './components/component';
+import ScrollAni from './components/scrollAni';
+import gsap from 'gsap';
 class CustomRenderer extends Highway.Renderer {
 
   constructor(props) {
@@ -12,7 +14,7 @@ class CustomRenderer extends Highway.Renderer {
 
     // this.components.push(new Component());
     this.properties.renderer.then(() => {
-      new Component()
+      new ScrollAni();
     });
   }
   

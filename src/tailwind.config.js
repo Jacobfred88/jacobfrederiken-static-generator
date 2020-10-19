@@ -56,7 +56,10 @@ module.exports = {
         loose: '2',
       },
       extend: {
-        spacing: {}
+        spacing: {},
+        zIndex: {
+          '999' : 999,
+        }
       }
     },
     variants: {},
