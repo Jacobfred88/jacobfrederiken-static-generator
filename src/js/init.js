@@ -1,30 +1,30 @@
-import "./routing";
+import './routing';
 import store from './global/store';
-import {onReady,onResize} from './global/renderer';
+import { onReady, onResize } from './global/renderer';
 
-document.addEventListener("DOMContentLoaded", () => {
-	
-	store.windowWidth = window.innerWidth;
-	store.windowHeight = window.innerHeight;
-	
-	onReady();
-}, false);
+document.addEventListener(
+	'DOMContentLoaded',
+	() => {
+		store.windowWidth = window.innerWidth;
+		store.windowHeight = window.innerHeight;
 
+		onReady();
+	},
+	false
+);
 
-let resizeTimeout = setTimeout(()=>{},0);
+let resizeTimeout = setTimeout(() => {}, 0);
 
-window.onresize = function(){
-	
+window.onresize = function () {
 	/* --- Clear the timeout if actively resizing --- */
 	clearTimeout(resizeTimeout);
 
 	/* --- Delay resize event --- */
-	resizeTimeout = setTimeout(()=>{
-
+	resizeTimeout = setTimeout(() => {
 		/* --- Keep these up to date --- */
 		store.windowWidth = window.innerWidth;
 		store.windowHeight = window.innerHeight;
-		
+
 		/* --- Fire onResize --- */
 		onResize();
 	}, 250);

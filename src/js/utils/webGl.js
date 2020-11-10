@@ -1,41 +1,41 @@
-import {Curtains,Plane, ShaderPass, Vec3, Vec2} from "curtainsjs";
+import { Curtains, Plane, ShaderPass, Vec3, Vec2 } from 'curtainsjs';
 import gsap from 'gsap';
-import { select} from '../utils';
+import { select } from '../utils';
 import store from '../global/store';
 
-
 const WebGl = {
-    context: null,
-    savedPlane: null,
-    planes: [],
-    init() {
+	context: null,
+	savedPlane: null,
+	planes: [],
+	init() {
+		this.context = new Curtains({
+			container: 'canvas',
+			watchScroll: false,
+			pixelRatio: Math.min(1.5, window.devicePixelRatio),
+		});
 
-        this.context = new Curtains({
-            container: "canvas",
-            watchScroll:false,
-            pixelRatio: Math.min(1.5, window.devicePixelRatio)
-        }); 
+		this.context
+			.onError(() => {
+				// we will add a class to the document body to display original images
+				document.body.classList.add('no-curtains', 'site-loaded');
+			})
+			.onContextLost(() => {
+				// on context lost, try to restore the context
+				this.context.restoreContext();
+			})
+			.onContextRestored(() => {
+				// since we have some textures that do not have any parent
+				// they won't be automatically restored
+				// so restore them after everything else has been restored
+				for (let i = 0; i < textures.length; i++) {
+					if (!textures[i].hasParent()) {
+						textures[i]._restoreContext();
+					}
+				}
+			});
 
-        this.context.onError(() => {
-            // we will add a class to the document body to display original images
-            document.body.classList.add("no-curtains", "site-loaded");
-        }).onContextLost(() => {
-            // on context lost, try to restore the context
-            this.context.restoreContext();
-        
-        }).onContextRestored(() => {
-            // since we have some textures that do not have any parent
-            // they won't be automatically restored
-            // so restore them after everything else has been restored
-            for(let i = 0; i < textures.length; i++) {
-                if(!textures[i].hasParent()) {
-                    textures[i]._restoreContext();
-                }
-            }
-        });
-
-        var shaderPass = new ShaderPass(this.context, {
-            fragmentShader: `
+		var shaderPass = new ShaderPass(this.context, {
+			fragmentShader: `
             precision mediump float;
             // get our varyings
             varying vec3 vVertexPosition;
@@ -57,25 +57,24 @@ const WebGl = {
             }
         
             `, // our fragment shader ID
-            uniforms: {
-                time: {
-                name: "uTime", // uniform name that will be passed to our shaders
-                type: "1f", // this means our uniform is a float
-                value: 0,
-                },
-            },
-        });
-        
-        shaderPass.onReady(() => {
-            
-        }).onRender(() => {
-            shaderPass.uniforms.time.value++; // update our time uniform value
-        });
-        
-    },
-    add(elm) {
-        const params = {
-            vertexShader: `
+			uniforms: {
+				time: {
+					name: 'uTime', // uniform name that will be passed to our shaders
+					type: '1f', // this means our uniform is a float
+					value: 0,
+				},
+			},
+		});
+
+		shaderPass
+			.onReady(() => {})
+			.onRender(() => {
+				shaderPass.uniforms.time.value++; // update our time uniform value
+			});
+	},
+	add(elm) {
+		const params = {
+			vertexShader: `
                 precision mediump float;
                 // those are the mandatory attributes that the lib sets
                 attribute vec3 aVertexPosition;
@@ -101,7 +100,7 @@ const WebGl = {
                     vVertexPosition = vertexPosition;
                 }
             `, // our vertex shader ID
-            fragmentShader: `
+			fragmentShader: `
                 precision mediump float;
                 
                 // get our varyings
@@ -121,86 +120,93 @@ const WebGl = {
                 gl_FragColor = texture2D(uSampler0, textureCoord);
                 }
             `, // our fragment shader ID
-            uniforms: {
-                time: {
-                name: "uTime", // uniform name that will be passed to our shaders
-                type: "1f", // this means our uniform is a float
-                value: 0,
-                },
-            }
-        };
-        
-        elm.children[0].style.display = 'none';
-    
-        this.planes.push(new Plane(this.context, elm, params));
-    },
-    goToProject(plane) {
-    
-        plane.userData.isTransition = true;
-    
-    
-        var elm = select('[data-template=project]');
-        var rect = elm.getBoundingClientRect();
-    
-        this.savedPlane = plane;
-    
-        this.planes.map(item => {
-            if(!item.userData.isTransition) {
-                item.visible = false;
-            }
-        })
-    
-        var scale = {
-            x: 1,
-            y: 1,
-        };
-    
-        var translate = {
-            x:0,
-            y:0,
-            z:0,
-        };
-    
-        gsap.to(scale, {
-            x:rect.width/plane.htmlElement.clientWidth,
-            y:rect.height/plane.htmlElement.clientHeight,
-            duration:2,
-            ease:"elastic.out(1, 0.4)",
-        onUpdate:() => {
-            plane.setScale(new Vec2(scale.x, scale.y));
-           }
-        });
-        
-        gsap.to(translate, {
-            x: (rect.left + rect.width/2) - plane.htmlElement.offsetLeft - plane.htmlElement.clientWidth/2,
-            y:(rect.top + rect.height/2) - plane.htmlElement.offsetTop - store.scroller.smoothScrollPos - plane.htmlElement.clientHeight/2,
-            duration:2,
-            ease:"elastic.out(1, 0.4)",
-        onUpdate:() => {
-            plane.setRelativeTranslation(new Vec3(translate.x, translate.y, translate.z));
-           },
-        });
-        
-    },
-    setSavedPlane(elm) {
-        this.savedPlane.resetPlane();
-        this.savedPlane.resetPlane(elm);
-        this.planes.push(this.savedPlane);
-        this.savedPlane = null;
+			uniforms: {
+				time: {
+					name: 'uTime', // uniform name that will be passed to our shaders
+					type: '1f', // this means our uniform is a float
+					value: 0,
+				},
+			},
+		};
 
-        
-        elm.children[0].style.opacity = '0';
-    },
-    clean(view) {
-        for (let index = 0; index < this.planes.length; index++) {
-            this.planes[index].remove();  
-            
-            console.log('remove!');
-        }
-        this.planes = [];
+		elm.children[0].style.display = 'none';
 
-        this.context.resize();
-    }
-}
+		this.planes.push(new Plane(this.context, elm, params));
+	},
+	goToProject(plane) {
+		plane.userData.isTransition = true;
+
+		var elm = select('[data-template=project]');
+		var rect = elm.getBoundingClientRect();
+
+		this.savedPlane = plane;
+
+		this.planes.map((item) => {
+			if (!item.userData.isTransition) {
+				item.visible = false;
+			}
+		});
+
+		var scale = {
+			x: 1,
+			y: 1,
+		};
+
+		var translate = {
+			x: 0,
+			y: 0,
+			z: 0,
+		};
+
+		gsap.to(scale, {
+			x: rect.width / plane.htmlElement.clientWidth,
+			y: rect.height / plane.htmlElement.clientHeight,
+			duration: 2,
+			ease: 'elastic.out(1, 0.4)',
+			onUpdate: () => {
+				plane.setScale(new Vec2(scale.x, scale.y));
+			},
+		});
+
+		gsap.to(translate, {
+			x:
+				rect.left +
+				rect.width / 2 -
+				plane.htmlElement.offsetLeft -
+				plane.htmlElement.clientWidth / 2,
+			y:
+				rect.top +
+				rect.height / 2 -
+				plane.htmlElement.offsetTop -
+				store.scroller.smoothScrollPos -
+				plane.htmlElement.clientHeight / 2,
+			duration: 2,
+			ease: 'elastic.out(1, 0.4)',
+			onUpdate: () => {
+				plane.setRelativeTranslation(
+					new Vec3(translate.x, translate.y, translate.z)
+				);
+			},
+		});
+	},
+	setSavedPlane(elm) {
+		this.savedPlane.resetPlane();
+		this.savedPlane.resetPlane(elm);
+		this.planes.push(this.savedPlane);
+		this.savedPlane = null;
+
+		elm.children[0].style.opacity = '0';
+	},
+	clean(view) {
+		for (let index = 0; index < this.planes.length; index++) {
+			this.planes[index].remove();
+
+			console.log('remove!');
+		}
+		this.planes = [];
+
+		this.context.resize();
+	},
+};
 
 export default WebGl;

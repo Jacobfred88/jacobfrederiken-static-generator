@@ -4,5 +4,9 @@ module.exports = {
 	useTabs: true,
 	semi: true,
 	singleQuote: true,
-	htmlWhitespaceSensitivity: 'css',
+	// htmlWhitespaceSensitivity: 'css',
+	"files.associations": {
+		"*.njk": "html"
+	},
+	"disableLanguages": []
 };

@@ -1,21 +1,21 @@
 {% extends './components/layout.njk' %}
 
 {% block body %}
-<div data-router-view="global">
-  <div data-scroll-inner class="js-scroll">
+  <div data-router-view="global">
+    <div data-scroll-inner="data-scroll-inner" class="js-scroll">
 
-  <div class="container">
-    <h1 class="text-4xl py-32">Hello world</h1>
-    <div class="row">
-      <div class="col w-full md:w-6/12 mb-16">
-        <div class="c-image" data-plane>
-          <img src="https://images.unsplash.com/photo-1421218108559-eb1ff78357f5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2090&q=80" alt="">
+      <div class="container">
+        <h1 class="text-4xl py-32">Hello world</h1>
+        <div class="row">
+          <div class="col w-full md:w-6/12 mb-16">
+            <div class="c-image" data-plane="data-plane">
+              <img src="https://images.unsplash.com/photo-1421218108559-eb1ff78357f5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2090&q=80" alt="">
+            </div>
+          </div>
         </div>
+
+        <a href="/page.njk" class="py-2 px-8 bg-white text-black text-xs rounded inline-block my-12">Go page</a>
+
       </div>
     </div>
-
-    <a href="/page.njk" class="py-2 px-8 bg-white text-black text-xs rounded inline-block my-12">Go page</a>
-
-  </div>
-</div>
-{% endblock %}
+  {% endblock %}

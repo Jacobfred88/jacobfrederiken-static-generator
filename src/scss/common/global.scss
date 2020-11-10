@@ -1,69 +1,67 @@
 html {
-    // font-size: calc(16*100vw/375);
-    // height: 100%;
+	// font-size: calc(16*100vw/375);
+	// height: 100%;
 
-    // @screen sm {
-    //     font-size: calc(16*100vw/720);
-    // }
+	// @screen sm {
+	//     font-size: calc(16*100vw/720);
+	// }
 
-    // @screen lg {
-    //     font-size: calc(16*100vw/1540);
-    // }
+	// @screen lg {
+	//     font-size: calc(16*100vw/1540);
+	// }
 
-    // @screen display {
-    //      font-size: calc(16*100vw/1940);
-    // }
+	// @screen display {
+	//      font-size: calc(16*100vw/1940);
+	// }
 }
 
 html {
-  font-size: calc(16px + (22 - 16) * ((100vw - 370px) / (2560 - 370)));
+	font-size: calc(16px + (22 - 16) * ((100vw - 370px) / (2560 - 370)));
 }
 
-
 body {
-    @apply .font-sans .font-normal .bg-black .text-white .antialiased;
+	@apply .font-sans .font-normal .bg-black .text-white .antialiased;
 }
 
 @responsive {
-  /* autoprefixer: off */
-  .fill-available {
-    min-height:100vh;
-    min-height: -webkit-fill-available;
+	/* autoprefixer: off */
+	.fill-available {
+		min-height: 100vh;
+		min-height: -webkit-fill-available;
 
-    .is-desktop & {
-      height: 100vh;
-      min-height:100vh;
-    }
-  }
+		.is-desktop & {
+			height: 100vh;
+			min-height: 100vh;
+		}
+	}
 }
 
 [data-lazy] {
-  opacity: 0;
-  // transition:opacity 0.35s ease-in-out;
-  &[data-ll-status=loaded] {
-    opacity: 1;
-  }
+	opacity: 0;
+	// transition:opacity 0.35s ease-in-out;
+	&[data-ll-status='loaded'] {
+		opacity: 1;
+	}
 }
 
 .is-not-mobile {
-  [data-router-view] {
-      position: absolute;
-      top:0;
-      left:0;
-      width:100%;
-      height:auto;
-  }
-
+	[data-router-view] {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: auto;
+	}
 }
 .is-mobile {
-  [data-scroll-container] {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
-      overflow-scrolling: touch;
-  }
+	[data-scroll-container] {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
+		overflow-scrolling: touch;
+	}
 }

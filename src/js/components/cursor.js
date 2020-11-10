@@ -1,65 +1,59 @@
-import {lerp,hasAttrInTree,selectAll} from '../utils';
-import {H} from '../routing';
+import { lerp, hasAttrInTree, selectAll } from '../utils';
+import { H } from '../routing';
 import store from '../global/store';
 
 class Cursor {
-  constructor() {
-      
-      this.updateElements = this.updateElements.bind(this);
-      this.cursor = document.querySelector('[data-cursor]');
+	constructor() {
+		this.updateElements = this.updateElements.bind(this);
+		this.cursor = document.querySelector('[data-cursor]');
 
-      if(!store.isMobile) {
-        this.x = 0;
-        this.y = 0;
-        this.vx = 0;
-        this.vy = 0;
+		if (!store.isMobile) {
+			this.x = 0;
+			this.y = 0;
+			this.vx = 0;
+			this.vy = 0;
 
-        document.addEventListener('mousemove', this.onMousemove.bind(this));
-        
+			document.addEventListener('mousemove', this.onMousemove.bind(this));
 
-        this.hoverElements = [];
-        this.onUpdate();
-        this.updateElements();
+			this.hoverElements = [];
+			this.onUpdate();
+			this.updateElements();
 
-        H.on('NAVIGATE_IN', this.updateElements);
+			H.on('NAVIGATE_IN', this.updateElements);
+		} else {
+			this.cursor.classList.add('hidden');
+		}
+	}
 
-      } else {
-         this.cursor.classList.add('hidden');
-      }
+	onMouseleave() {
+		this.cursor.classList.add('c-cursor--hide');
+	}
 
-  }
+	onMouseenter() {
+		this.cursor.classList.remove('c-cursor--hide');
+	}
 
-  onMouseleave() {
-    this.cursor.classList.add('c-cursor--hide');
-  }
+	updateElements() {
+		this.hoverElements = selectAll('[data-hover]');
+	}
 
-  onMouseenter() {
-    this.cursor.classList.remove('c-cursor--hide');
-  }
+	onUpdate() {
+		requestAnimationFrame(this.onUpdate.bind(this));
 
-  updateElements() {
-    this.hoverElements = selectAll('[data-hover]');
-  }
+		this.vx = lerp(this.vx, this.x, 0.15);
+		this.vy = lerp(this.vy, this.y, 0.15);
+		this.velocityX = this.vx - this.x;
+		this.velocityY = this.vy - this.y;
 
-  onUpdate() {
+		// var currentElm = document.elementFromPoint(this.x,this.y);
 
-    requestAnimationFrame(this.onUpdate.bind(this));
+		this.cursor.style.transform = `translate3d(${this.vx}px,${this.vy}px,0px)`;
+	}
 
-
-    this.vx = lerp(this.vx, this.x, 0.15);
-    this.vy = lerp(this.vy, this.y, 0.15);
-    this.velocityX =  this.vx - this.x;
-    this.velocityY =  this.vy - this.y;
-
-    // var currentElm = document.elementFromPoint(this.x,this.y);
-
-    this.cursor.style.transform = `translate3d(${this.vx}px,${this.vy}px,0px)`;
-  }
-
-  onMousemove(e) {
-    this.x = e.clientX;
-    this.y = e.clientY;
-  }
+	onMousemove(e) {
+		this.x = e.clientX;
+		this.y = e.clientY;
+	}
 }
 
 export default Cursor;

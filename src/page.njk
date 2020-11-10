@@ -1,16 +1,16 @@
 {% extends './components/layout.njk' %}
 
 {% block body %}
-<div data-router-view="global">
-  <div data-scroll-inner class="js-scroll">
-  <div class="container">
-    <h1 class="text-4xl py-32">A page!</h1>
-    <div class="c-image">
-      <img data-lazy data-src="https://images.unsplash.com/photo-1570478161308-a458875b199f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80" alt="">
-    </div>
-    <a href="/" class="py-2 px-8 bg-white text-black text-xs rounded inline-block my-12">Home</a>
-  </div>
+  <div data-router-view="global">
+    <div data-scroll-inner="data-scroll-inner" class="js-scroll">
+      <div class="container">
+        <h1 class="text-4xl py-32">A page!</h1>
+        <div class="c-image">
+          <img data-lazy="data-lazy" data-src="https://images.unsplash.com/photo-1570478161308-a458875b199f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80" alt="">
+        </div>
+        <a href="/" class="py-2 px-8 bg-white text-black text-xs rounded inline-block my-12">Home</a>
+      </div>
 
     </div>
-</div>
+  </div>
 {% endblock %}

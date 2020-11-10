@@ -1,6 +1,6 @@
 // import ASScroll from '@ashthornton/asscroll';
 const Browserizr = require('browserizr').default;
-import {listen} from "quicklink";
+import { listen } from 'quicklink';
 import LazyLoad from 'vanilla-lazyload';
 import store from './store';
 import WaitCursor from '../utils/waitCursor';
@@ -11,7 +11,7 @@ import WebGl from '../utils/webGl';
 
 import Menu from '../components/menu';
 
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gsap from 'gsap';
 
 import ScrollToPlugin from '../utils/gsap-shockingly-green/esm/ScrollToPlugin';
@@ -19,84 +19,91 @@ import ScrollToPlugin from '../utils/gsap-shockingly-green/esm/ScrollToPlugin';
 gsap.registerPlugin(ScrollToPlugin);
 gsap.registerPlugin(ScrollTrigger);
 
-if(!Browserizr.detect().isMobile()) {
-    WebGl.init();
+if (!Browserizr.detect().isMobile()) {
+	WebGl.init();
 }
 
 var lazyLoadInstance;
 const waitCursor = new WaitCursor(300);
 
 const setCurrentLinks = () => {
-    const links = document.querySelectorAll('a');
-    
-    for (let i = 0; i < links.length; i++) {
-        const link = links[i];
-        // Clean class
-        link.classList.remove('is-current-link');
-    
-        // Active link
-        if (link.href === location.href) {
-          link.classList.add('is-current-link');
-        }
-    }
-}
+	const links = document.querySelectorAll('a');
 
-export const onReady = ()=> {
-    
-    const classes = Browserizr.detect().cssClasses(['Mobile', 'Desktop','IE11','IOS','Chrome','Safari','Android','Edge','IPhone5','IPad']);
-    
-    classes.map(detectClass => {
-      document.querySelector('html').classList.add(detectClass);
-    });
+	for (let i = 0; i < links.length; i++) {
+		const link = links[i];
+		// Clean class
+		link.classList.remove('is-current-link');
 
-    store.isDesktop = Browserizr.detect().isDesktop();
-    store.isMobile = Browserizr.detect().isMobile();
-    store.isFirefox = Browserizr.detect().isMoz();
-    store.isSafari = Browserizr.detect().isSafari();
-    store.isIe11 = Browserizr.detect().isIE11();
-    store.isChrome = Browserizr.detect().isChrome();
-    
+		// Active link
+		if (link.href === location.href) {
+			link.classList.add('is-current-link');
+		}
+	}
+};
 
-    if(!store.isMobile) {
-        new CustomScroll();
-    } else {
-        ScrollTrigger.defaults({
-            scroller: '[data-scroll-container]'
-        });
-    }
-    new Preloader();
-    new Cursor();
-    new Menu();
-    
-    listen();
+export const onReady = () => {
+	const classes = Browserizr.detect().cssClasses([
+		'Mobile',
+		'Desktop',
+		'IE11',
+		'IOS',
+		'Chrome',
+		'Safari',
+		'Android',
+		'Edge',
+		'IPhone5',
+		'IPad',
+	]);
 
-    setCurrentLinks();
+	classes.map((detectClass) => {
+		document.querySelector('html').classList.add(detectClass);
+	});
 
-    lazyLoadInstance = new LazyLoad({
-        elements_selector: '[data-lazy]',
-    });
+	store.isDesktop = Browserizr.detect().isDesktop();
+	store.isMobile = Browserizr.detect().isMobile();
+	store.isFirefox = Browserizr.detect().isMoz();
+	store.isSafari = Browserizr.detect().isSafari();
+	store.isIe11 = Browserizr.detect().isIE11();
+	store.isChrome = Browserizr.detect().isChrome();
 
-    let vh = store.windowHeight * 0.01;
+	if (!store.isMobile) {
+		new CustomScroll();
+	} else {
+		ScrollTrigger.defaults({
+			scroller: '[data-scroll-container]',
+		});
+	}
+	new Preloader();
+	new Cursor();
+	new Menu();
+
+	listen();
+
+	setCurrentLinks();
+
+	lazyLoadInstance = new LazyLoad({
+		elements_selector: '[data-lazy]',
+	});
+
+	let vh = store.windowHeight * 0.01;
 
 	document.body.style.setProperty('--vh', `${vh}px`);
 	document.body.style.setProperty('--vhu', `${vh}px`); // viewport height updated
-
 };
 
 export const onResize = () => {
-    window.dispatchEvent(new CustomEvent('onResize'));
+	window.dispatchEvent(new CustomEvent('onResize'));
 
-    let vh = store.windowHeight * 0.01;
-    document.body.style.setProperty('--vhu', `${vh}px`);
-    
-    if(store.scroller) {
-        store.scroller.onResize( store.windowHeight, store.windowHeight );
-    }
-}
+	let vh = store.windowHeight * 0.01;
+	document.body.style.setProperty('--vhu', `${vh}px`);
 
+	if (store.scroller) {
+		store.scroller.onResize(store.windowHeight, store.windowHeight);
+	}
+};
 
-export const onLeave = (from, trigger, location)=> {
-    waitCursor.start();
+export const onLeave = (from, trigger, location) => {
+	waitCursor.start();
 };
 
 /*
@@ -106,10 +113,10 @@ export const onLeave = (from, trigger, location)=> {
  *	DOM related event measurements. Both view containers
  *	are still loaded into the DOM during this callback.
  */
-export const onEnter = (to, trigger, location)=>{
-    lazyLoadInstance.update();
-    setCurrentLinks();
-    waitCursor.end();
+export const onEnter = (to, trigger, location) => {
+	lazyLoadInstance.update();
+	setCurrentLinks();
+	waitCursor.end();
 };
 
 /*
@@ -119,14 +126,14 @@ export const onEnter = (to, trigger, location)=>{
  *	The previous view's DOM node has been removed when this
  *	event fires.
  */
-export const onEnterCompleted = (from, to, trigger, location)=>{
-    if(store.firstLoad) {
-        store.firstLoad = false;
-    }
+export const onEnterCompleted = (from, to, trigger, location) => {
+	if (store.firstLoad) {
+		store.firstLoad = false;
+	}
 
-    listen({
-        el: to.view
-    });
+	listen({
+		el: to.view,
+	});
 
 	/* --- Track Page Views through Ajax --- */
 	// tracking("google", "set", "page", location.pathname);
