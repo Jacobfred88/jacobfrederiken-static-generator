@@ -15,8 +15,8 @@ export default class Components extends BaseComponent {
 
     onPreloadCompleted() {
         // console.log('onPreloadCompleted');
-
         Array.from(document.querySelectorAll('[data-plane]')).map(elm => {
+            console.log('complte!',elm);
             gsap.from(elm, {
               scrollTrigger: {
                 trigger: elm,

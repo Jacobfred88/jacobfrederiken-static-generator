@@ -11,11 +11,13 @@
     "@ashthornton/asscroll": "^1.7.1",
     "@dogstudio/highway": "^2.2.1",
     "browserizr": "^3.2.5",
+    "curtainsjs": "^7.1.1",
     "gsap": "^3.5.1",
     "nunjucks": "^3.2.2",
     "parcel-bundler": "^1.1.0",
     "parcel-plugin-bundle-manifest": "^0.2.0",
     "parcel-plugin-nunjucks": "^2.2.1",
+    "prettier": "^2.1.2",
     "quicklink": "^2.0.0",
     "vanilla-lazyload": "^17.1.2"
   },

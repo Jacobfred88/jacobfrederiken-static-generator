@@ -18,7 +18,7 @@ export default class BaseComponent {
     preloadCompleted() {
 
         if(store.scroller && this.onScrollerRaf) {
-            store.scroller.on('raf', this.onScrollerRaf);
+            store.scroller.on('raf', ({scrollPos, smoothScrollPos}) => this.onScrollerRaf({scrollPos, smoothScrollPos}));
         }
 
         if(this.onPreloadCompleted) {
@@ -39,7 +39,6 @@ export default class BaseComponent {
         }
 
         window.removeEventListener('onResize', this.resize);
-        H.off("NAVIGATE_OUT", this.destroy);
         if(this.onDestroy) {
             this.onDestroy();
         }

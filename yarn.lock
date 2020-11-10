@@ -1762,6 +1762,10 @@ cssstyle@^1.1.1:
   dependencies:
     cssom "0.3.x"
 
+curtainsjs@^7.1.1:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/curtainsjs/-/curtainsjs-7.2.1.tgz#46a026ee8092cd6f48072a88cd85eccba6f9f8f4"
+
 dashdash@^1.12.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"
@@ -3828,6 +3832,10 @@ posthtml@^0.13.4:
 prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
+
+prettier@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.1.2.tgz#3050700dae2e4c8b67c4c3f666cdb8af405e1ce5"
 
 pretty-hrtime@^1.0.3:
   version "1.0.3"

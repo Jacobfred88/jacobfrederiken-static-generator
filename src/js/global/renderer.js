@@ -1,11 +1,14 @@
 // import ASScroll from '@ashthornton/asscroll';
 const Browserizr = require('browserizr').default;
+import {listen} from "quicklink";
 import LazyLoad from 'vanilla-lazyload';
 import store from './store';
 import WaitCursor from '../utils/waitCursor';
 import Cursor from '../components/cursor';
 import Preloader from '../utils/preloader';
 import CustomScroll from '../utils/customScroll';
+import WebGl from '../utils/webGl';
+
 import Menu from '../components/menu';
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -16,6 +19,9 @@ import ScrollToPlugin from '../utils/gsap-shockingly-green/esm/ScrollToPlugin';
 gsap.registerPlugin(ScrollToPlugin);
 gsap.registerPlugin(ScrollTrigger);
 
+if(!Browserizr.detect().isMobile()) {
+    WebGl.init();
+}
 
 var lazyLoadInstance;
 const waitCursor = new WaitCursor(300);
@@ -25,7 +31,6 @@ const setCurrentLinks = () => {
     
     for (let i = 0; i < links.length; i++) {
         const link = links[i];
-    
         // Clean class
         link.classList.remove('is-current-link');
     
@@ -51,13 +56,21 @@ export const onReady = ()=> {
     store.isIe11 = Browserizr.detect().isIE11();
     store.isChrome = Browserizr.detect().isChrome();
     
-    new CustomScroll();
+
+    if(!store.isMobile) {
+        new CustomScroll();
+    } else {
+        ScrollTrigger.defaults({
+            scroller: '[data-scroll-container]'
+        });
+    }
     new Preloader();
     new Cursor();
     new Menu();
     
-    setCurrentLinks();
+    listen();
 
+    setCurrentLinks();
 
     lazyLoadInstance = new LazyLoad({
         elements_selector: '[data-lazy]',
@@ -107,10 +120,13 @@ export const onEnter = (to, trigger, location)=>{
  *	event fires.
  */
 export const onEnterCompleted = (from, to, trigger, location)=>{
-
     if(store.firstLoad) {
         store.firstLoad = false;
     }
+
+    listen({
+        el: to.view
+    });
 
 	/* --- Track Page Views through Ajax --- */
 	// tracking("google", "set", "page", location.pathname);

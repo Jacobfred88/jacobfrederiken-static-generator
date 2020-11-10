@@ -3,41 +3,52 @@
 <!doctype html>
 <html class="no-js" lang="">
 
-<head>
-  <meta charset="utf-8">
-  <title>Static site builder</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8">
+    <title>Static site builder</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="manifest" href="site.webmanifest">
-  <link rel="apple-touch-icon" href="icon.png">
-  <!-- Place favicon.ico in the root directory -->
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" href="icon.png">
+    <!-- Place favicon.ico in the root directory -->
 
-  <link rel="stylesheet" href="scss/main.scss">
-  <meta name="theme-color" content="#fafafa">
+    <link rel="stylesheet" href="scss/main.scss">
+    <meta name="theme-color" content="#fafafa">
 
-</head>
+  </head>
 
-<body>
-  {% include "./header.njk" %}
-  <div data-scroll-container>
-    <main data-router-wrapper>
-      <div data-router-view="global">
-          <div data-scroll-inner class="js-scroll">
-            {% block body %}{% endblock %}
+  <body class="overflow-hidden">
+
+    <div id="canvas" class="fixed inset-0 pointer-events-none z-30"></div>
+    {% include "./header.njk" %}
+
+    <div data-scroll-container>
+      <main data-router-wrapper>
+        {% block body %}{% endblock %}
+      </main>
+    </div>
+
+    <div data-cursor class="w-6 h-6 -mt-3 -ml-3 z-50 bg-white fixed top-0 left-0 rounded-full pointer-events-none"></div>
+    <div data-sail class="fixed inset-0 w-full h-full bg-gray flex items-center justify-center z-999 overflow-hidden transform translate-y-full"></div>
+    <div data-preloader class="fixed inset-0 w-full h-full  bg-gray flex items-center justify-center z-999 overflow-hidden">
+      <div  class="text-black text-4xl"><span data-preloader-progress>0</span>%</div>
+    </div>
+
+    <div class="debug" onclick="this.classList.toggle('grid')"></div>
+
+    <div class="fixed top-0 left-0 w-full pointer-events-none invisible">
+      <div class="container">
+        <div class="row justify-center">
+          <div class="col w-full md:w-8/12 lg:w-6/12 pt-64">
+            <div class="c-image border" data-template="project">
+            </div>
           </div>
+        </div>
       </div>
-    </main>
-  </div>
+    </div>
+    
+    <script src="js/main.js"></script>
 
-  <div data-cursor class="w-6 h-6 -mt-3 -ml-3 z-50 bg-white fixed top-0 left-0 rounded-full pointer-events-none"></div>
-  <div data-sail class="fixed inset-0 w-full h-full bg-black flex items-center justify-center z-999 overflow-hidden transform translate-y-full"></div>
-  <div data-preloader class="fixed inset-0 w-full h-full bg-black flex items-center justify-center z-999 overflow-hidden">
-    <div class="w-8 h-4 bg-white animate-bounce"></div>
-  </div>
-  <div class="debug" onclick="console.log(this.classList.toggle('grid'))"></div>
-  
-  <script src="js/main.js"></script>
-
-</body>
+  </body>
 </html>

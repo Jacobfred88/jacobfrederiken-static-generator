@@ -13,8 +13,9 @@ module.exports = {
       },
       colors: {
         transparent: "transparent",
-        black: "#000",
+        black: "#0d0d0d",
         white: "#FFFFFF",
+        gray: '#f7fafc',
       },
       fontFamily: {
         sans: [

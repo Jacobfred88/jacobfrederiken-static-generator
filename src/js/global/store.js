@@ -1,7 +1,7 @@
 //https://github.com/joshkirk/highway-scroll/blob/master/src/js/_global/storage.js
-
 export default {
     'firstLoad': true,
+    'curtains': null,
     'windowHeight': '',
     'windowWidth':'',
     'reducedMotion': window.matchMedia("(prefers-reduced-motion: reduce)").matches,

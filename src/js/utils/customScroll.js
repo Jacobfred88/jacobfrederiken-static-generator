@@ -4,6 +4,7 @@ import {select, selectAll} from '../utils'
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {H} from '../routing';
+import WebGl from './webGl';
 
 export default class CustomScroll {
     constructor() {
@@ -14,6 +15,7 @@ export default class CustomScroll {
 
         this.onLeave = this.onLeave.bind(this);
         this.onEnter = this.onEnter.bind(this);
+        this.onRaf = this.onRaf.bind(this);
         this.updateScrollTrigger = this.updateScrollTrigger.bind(this);
         this.onScrollTriggerRefresh = this.onScrollTriggerRefresh.bind(this);
 
@@ -21,7 +23,7 @@ export default class CustomScroll {
             element: '[data-scroll-container]',
             innerElement: '[data-scroll-inner]',
             disableResize: true,
-            disableOnTouch:true,
+            disableOnTouch:false,
         });
 
         store.scroller = this.scroller;
@@ -29,12 +31,10 @@ export default class CustomScroll {
         this.setup();
 
         H.on("NAVIGATE_OUT", this.onLeave);
-        H.on("NAVIGATE_IN", this.onEnter);
+        H.on("NAVIGATE_END", this.onEnter);
     }
 
-    setup() {
-
-        
+    setup() {        
         store.scroller.enable();
         this.setupScrollTrigger(document.querySelector('[data-scroll-inner]'));
     }
@@ -55,8 +55,19 @@ export default class CustomScroll {
             },
         });
 
-        this.scroller.on("raf", this.updateScrollTrigger);
+        this.scroller.on("raf", this.onRaf);
         ScrollTrigger.addEventListener("refresh", this.onScrollTriggerRefresh);
+    }
+
+    onRaf({scrollPos,smoothScrollPos}) {
+        if(scrollPos !==smoothScrollPos ) {
+            WebGl.context.updateScrollValues(0, smoothScrollPos * -1);
+            WebGl.context.needRende
+            
+           
+        }
+        
+        this.updateScrollTrigger();
     }
 
     updateScrollTrigger() {
@@ -73,7 +84,7 @@ export default class CustomScroll {
         ScrollTrigger.removeEventListener("refresh", this.onScrollTriggerRefresh);
     }
 
-    onEnter({to}) {
+    onEnter({to}) {   
         this.scroller.enable(false, true, to.view.querySelector('[data-scroll-inner]'));  
         this.setupScrollTrigger(to.view.querySelector('[data-scroll-inner]'));
     }
