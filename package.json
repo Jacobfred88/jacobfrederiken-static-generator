@@ -10,6 +10,8 @@
   "dependencies": {
     "@ashthornton/asscroll": "^1.7.1",
     "@dogstudio/highway": "^2.2.1",
+    "@tailwindcss/forms": "^0.2.1",
+    "autoprefixer": "^10.0.4",
     "browserizr": "^3.2.5",
     "curtainsjs": "^7.1.1",
     "gsap": "^3.5.1",
@@ -17,12 +19,13 @@
     "parcel-bundler": "^1.1.0",
     "parcel-plugin-bundle-manifest": "^0.2.0",
     "parcel-plugin-nunjucks": "^2.2.1",
+    "postcss": "^8.1.10",
     "prettier": "^2.1.2",
     "quicklink": "^2.0.0",
+    "tailwindcss": "^2.0.1",
     "vanilla-lazyload": "^17.1.2"
   },
   "devDependencies": {
-    "sass": "^1.27.0",
-    "tailwindcss": "^1.9.4"
+    "sass": "^1.27.0"
   }
 }

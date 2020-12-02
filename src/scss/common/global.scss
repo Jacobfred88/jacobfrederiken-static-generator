@@ -20,7 +20,7 @@ html {
 }
 
 body {
-	@apply .font-sans .font-normal .bg-black .text-white .antialiased;
+	@apply font-sans font-normal bg-black text-white antialiased;
 }
 
 @responsive {

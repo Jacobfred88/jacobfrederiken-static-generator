@@ -1,28 +1,33 @@
 .c-richtext {
-    * {
-        margin:rem(20px) 0;
-        
-        &:first-child {
-            margin-top:0;
-        }
-        
-        &:last-child {
-            margin-bottom:0;
-        }
-    }
-    
-    h1,h2,h3,h4,h5,h6 {
-        @apply .text-lg .mt-16 .mb-6;
-        
-    }
+	* {
+		margin: rem(20px) 0;
 
-    ul,ol {
-        li {
-            margin:0;
-        }
-    }
+		&:first-child {
+			margin-top: 0;
+		}
 
-    a {
-        text-decoration: underline;
-    }
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply text-lg mt-16 mb-6;
+	}
+
+	ul,
+	ol {
+		li {
+			margin: 0;
+		}
+	}
+
+	a {
+		text-decoration: underline;
+	}
 }

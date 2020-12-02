@@ -77,12 +77,13 @@ module.exports = {
 		},
 	},
 	variants: {},
+	plugins: [require('@tailwindcss/forms')],
 	corePlugins: {
 		container: false,
 	},
 	purge: {
 		options: {
-			whitelistPatterns: [
+			safelistPatterns: [
 				/^is-/,
 				/^is-non/,
 				/^tl-/,
@@ -90,11 +91,8 @@ module.exports = {
 				/^flickity--/,
 				/^fx-/,
 			],
-			whitelist: ['opacity-50', 'pointer-events-none'],
+			safelist: ['opacity-50', 'pointer-events-none'],
 		},
 		content: ['./src/**/*.html', './src/**/*.njk'],
-	},
-	future: {
-		removeDeprecatedGapUtilities: true,
 	},
 };
