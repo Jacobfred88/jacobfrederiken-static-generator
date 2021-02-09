@@ -15,7 +15,7 @@
     "browserizr": "^3.2.5",
     "curtainsjs": "^7.1.1",
     "graphql": "^15.5.0",
-    "gsap": "^3.5.1",
+    "gsap": "^3.6.0",
     "locomotive-scroll": "^4.0.6",
     "nunjucks": "^3.2.2",
     "parcel-bundler": "^1.1.0",
