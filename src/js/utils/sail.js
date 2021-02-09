@@ -4,7 +4,6 @@ import { select } from './index.js';
 const Sail = {
 	elm: select('[data-sail]'),
 	show(cb) {
-		console.log('shiw');
 		gsap.fromTo(
 			this.elm,
 			{
@@ -19,7 +18,6 @@ const Sail = {
 		);
 	},
 	hide() {
-		console.log('hide');
 		gsap.to(this.elm, {
 			autoAlpha: 0,
 			duration: 0.25,
