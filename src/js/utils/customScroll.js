@@ -1,31 +1,30 @@
-import ASScroll from '@ashthornton/asscroll';
+import LocomotiveScroll from 'locomotive-scroll';
 import store from '../global/store';
 import { select, selectAll } from '../utils';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { H } from '../routing';
-import WebGl from './webGl';
+import { defaultTypeResolver } from 'graphql';
 
 export default class CustomScroll {
 	constructor() {
-		if ('scrollRestoration' in history) {
-			history.scrollRestoration = 'manual';
-		}
-
 		this.onLeave = this.onLeave.bind(this);
 		this.onEnter = this.onEnter.bind(this);
-		this.onRaf = this.onRaf.bind(this);
-		this.updateScrollTrigger = this.updateScrollTrigger.bind(this);
 		this.onScrollTriggerRefresh = this.onScrollTriggerRefresh.bind(this);
-
-		this.scroller = new ASScroll({
-			element: '[data-scroll-container]',
-			innerElement: '[data-scroll-inner]',
-			disableResize: true,
-			disableOnTouch: false,
+		store.scroller = new LocomotiveScroll({
+			el: select('[data-scroll-container]'),
+			smooth: !store.isMobile,
+			lerp: 0.125,
+			firefoxMultiplier: 200,
+			smartphone: {
+				smooth: !store.isMobile,
+			},
+			tablet: {
+				smooth: !store.isMobile,
+			},
+			getDirection: true,
+			getSpeed: true,
 		});
-
-		store.scroller = this.scroller;
 
 		this.setup();
 
@@ -34,20 +33,19 @@ export default class CustomScroll {
 	}
 
 	setup() {
-		store.scroller.enable();
-		this.setupScrollTrigger(document.querySelector('[data-scroll-inner]'));
+		this.setupScrollTrigger(select('[data-scroll-container]'));
 	}
 
 	setupScrollTrigger(scrollInner) {
 		ScrollTrigger.defaults({
-			scroller: '[data-scroll-inner]',
+			scroller: '[data-scroll-container]',
 		});
 
 		ScrollTrigger.scrollerProxy(scrollInner, {
 			scrollTop(value) {
 				return arguments.length
-					? store.scroller.scrollTo(value)
-					: -store.scroller.smoothScrollPos;
+					? store.scroller.scrollTo(value, 0, 0)
+					: store.scroller.scroll.instance.scroll.y;
 			},
 			getBoundingClientRect() {
 				return {
@@ -57,44 +55,26 @@ export default class CustomScroll {
 					height: window.innerHeight,
 				};
 			},
+			pinType: scrollInner.style.transform ? 'transform' : 'fixed',
 		});
 
-		this.scroller.on('raf', this.onRaf);
+		store.scroller.on('scroll', ScrollTrigger.update);
 		ScrollTrigger.addEventListener('refresh', this.onScrollTriggerRefresh);
 	}
 
-	onRaf({ scrollPos, smoothScrollPos }) {
-		if (scrollPos !== smoothScrollPos) {
-			WebGl.context.updateScrollValues(0, smoothScrollPos * -1);
-			WebGl.context.needRende;
-		}
-
-		this.updateScrollTrigger();
-	}
-
-	updateScrollTrigger() {
-		ScrollTrigger.update();
-	}
-
 	onScrollTriggerRefresh() {
-		this.scroller.onResize();
+		store.scroller.update();
 	}
 
 	onLeave() {
-		this.scroller.disable();
-		this.scroller.off('raf', this.updateScrollTrigger);
+		store.scroller.destroy();
 		ScrollTrigger.removeEventListener(
 			'refresh',
 			this.onScrollTriggerRefresh
 		);
 	}
 
-	onEnter({ to }) {
-		this.scroller.enable(
-			false,
-			true,
-			to.view.querySelector('[data-scroll-inner]')
-		);
-		this.setupScrollTrigger(to.view.querySelector('[data-scroll-inner]'));
+	onEnter() {
+		store.scroller.init();
 	}
 }

@@ -1,7 +1,6 @@
 import Highway from '@dogstudio/highway';
 import Global from './renderers';
 import Transition from './transitions';
-import ProjectTransition from './transitions/project';
 import { onLeave, onEnter, onEnterCompleted } from './global/renderer';
 
 export const H = new Highway.Core({
@@ -10,9 +9,6 @@ export const H = new Highway.Core({
 	},
 	transitions: {
 		global: Transition,
-		contextual: {
-			project: ProjectTransition,
-		},
 	},
 });
 

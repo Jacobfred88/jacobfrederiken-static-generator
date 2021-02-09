@@ -18,33 +18,17 @@
 
   <body class="overflow-hidden">
 
-    <div id="canvas" class="fixed inset-0 pointer-events-none z-30"></div>
     {% include "./header.njk" %}
-
     <div data-scroll-container="data-scroll-container">
       <main data-router-wrapper="data-router-wrapper">
         {% block body %}{% endblock %}
       </main>
     </div>
 
-    <div data-cursor="data-cursor" class="w-6 h-6 -mt-3 -ml-3 z-50 bg-white fixed top-0 left-0 rounded-full pointer-events-none"></div>
-    <div data-sail="data-sail" class="fixed inset-0 w-full h-full bg-gray flex items-center justify-center z-999 overflow-hidden transform translate-y-full"></div>
-    <div data-preloader="data-preloader" class="fixed inset-0 w-full h-full  bg-gray flex items-center justify-center z-999 overflow-hidden">
-      <div class="text-black text-4xl">
-        <span data-preloader-progress="data-preloader-progress">0</span>%</div>
-    </div>
-
-    <div class="debug" onclick="this.classList.toggle('grid')"></div>
-
-    <div class="fixed top-0 left-0 w-full pointer-events-none invisible">
-      <div class="container">
-        <div class="row justify-center">
-          <div class="col w-full md:w-8/12 lg:w-6/12 pt-64">
-            <div class="c-image border" data-template="project"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+    {% include "./cursor.njk" %}
+    {% include "./sail.njk" %}
+    {% include "./preloader.njk" %}
+    {% include "./debug.njk" %}
 
     <script src="js/main.js"></script>
 

@@ -7,9 +7,8 @@ import WaitCursor from '../utils/waitCursor';
 import Cursor from '../components/cursor';
 import Preloader from '../utils/preloader';
 import CustomScroll from '../utils/customScroll';
-import WebGl from '../utils/webGl';
 
-import Menu from '../components/menu';
+import Menu from '../partials/menu';
 
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gsap from 'gsap';
@@ -18,10 +17,6 @@ import ScrollToPlugin from '../utils/gsap-shockingly-green/esm/ScrollToPlugin';
 
 gsap.registerPlugin(ScrollToPlugin);
 gsap.registerPlugin(ScrollTrigger);
-
-if (!Browserizr.detect().isMobile()) {
-	WebGl.init();
-}
 
 var lazyLoadInstance;
 const waitCursor = new WaitCursor(300);

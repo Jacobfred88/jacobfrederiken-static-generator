@@ -2,26 +2,28 @@ import gsap from 'gsap';
 import { select } from './index.js';
 
 const Sail = {
-	elm: select('[data-sail'),
-	out(cb) {
+	elm: select('[data-sail]'),
+	show(cb) {
+		console.log('shiw');
 		gsap.fromTo(
 			this.elm,
 			{
-				y: '100vh',
+				autoAlpha: 0,
 			},
 			{
-				y: '0',
-				duration: 1,
+				autoAlpha: 1,
+				duration: 0.25,
 				ease: 'expo.out',
 				onComplete: () => cb(),
 			}
 		);
 	},
-	in() {
+	hide() {
+		console.log('hide');
 		gsap.to(this.elm, {
-			y: '-100vh',
-			duration: 1,
-			delay: 0.2,
+			autoAlpha: 0,
+			duration: 0.25,
+			delay: 0.1,
 			ease: 'expo.out',
 		});
 	},

@@ -1,0 +1,6 @@
+[data-lazy] {
+  opacity: 0;
+  &[data-ll-status='loaded'] {
+    opacity: 1;
+  }
+}

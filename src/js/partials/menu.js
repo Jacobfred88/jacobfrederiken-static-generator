@@ -1,4 +1,4 @@
-import BaseComponent from './baseComponent';
+import BaseComponent from '../components/baseComponent';
 import store from '../global/store';
 import { select, selectAll } from '../utils';
 import { H } from '../routing';

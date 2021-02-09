@@ -1,183 +1,181 @@
-    
-
-    
 $settings: (
-    root: (
-        cols: 4,
-        maxWidth: '100%',
-        offset: rem(16px),
-        gutter: rem(16px),
-    ),
-    md: (
-        cols: 12,
-        maxWidth: '100%',
-        offset: rem(32px),
-        gutter: rem(16px),
-    ),
-    xl: (
-        cols: 12,
-        maxWidth: '100%',
-        offset: rem(64px),
-        gutter: rem(16px),
-    ),
+	root: (
+		cols: 4,
+		maxWidth: '100%',
+		offset: rem(16px),
+		gutter: rem(16px),
+	),
+	md: (
+		cols: 12,
+		maxWidth: '100%',
+		offset: rem(16px),
+		gutter: rem(16px),
+	),
+	xl: (
+		cols: 12,
+		maxWidth: '100%',
+		offset: rem(16px),
+		gutter: rem(16px),
+	),
 );
 
 :root {
-    --color: hsla(0, 100%, 46%, 0.25);
+	--color: hsla(0, 100%, 46%, 0.25);
 }
 
 @each $breakpoint, $setting in $settings {
-        :root {
-            @if($breakpoint == 'root') {
-                --columns:  #{map-get($setting, cols)};
-                --gutter: #{map-get($setting, gutter)};
-                --offset: #{map-get($setting, offset)};
-                --max_width: calc(#{map-get($setting, maxWidth)} - #{rem(16px)} * 2);
-            } @else {
-                @screen #{$breakpoint} {
-                    --columns: 12;
-                    --gutter: #{map-get($setting, gutter)};
-                    --offset: #{map-get($setting, offset)};
-                    --max_width: calc(#{map-get($setting, maxWidth)} - #{rem(16px)} * 2);
-                }
-            }
-        }
+	:root {
+		@if ($breakpoint == 'root') {
+			--columns: #{map-get($setting, cols)};
+			--gutter: #{map-get($setting, gutter)};
+			--offset: #{map-get($setting, offset)};
+			--max_width: calc(
+				#{map-get($setting, maxWidth)} -
+					#{map-get($setting, gutter)} *
+					2
+			);
+		} @else {
+			@screen #{$breakpoint} {
+				--columns: #{map-get($setting, cols)};
+				--gutter: #{map-get($setting, gutter)};
+				--offset: #{map-get($setting, offset)};
+				--max_width: calc(
+					#{map-get($setting, maxWidth)} - #{map-get(
+							$setting,
+							gutter
+						)} * 2
+				);
+			}
+		}
+	}
 }
 
-
 .container {
+	width: 100%;
+	@each $breakpoint, $setting in $settings {
+		@if ($breakpoint == 'root') {
+			padding-left: #{map-get($setting, offset)};
+			padding-right: #{map-get($setting, offset)};
+			max-width: #{map-get($setting, maxWidth)};
+		} @else {
+			@screen #{$breakpoint} {
+				padding-left: #{map-get($setting, offset)};
+				padding-right: #{map-get($setting, offset)};
+				max-width: #{map-get($setting, maxWidth)};
+			}
+		}
+	}
 
-    width:100%;
-    @each $breakpoint, $setting in $settings {
-     
-        @if($breakpoint == 'root') {
-            padding-left:#{map-get($setting, offset)};
-            padding-right:#{map-get($setting, offset)};
-            max-width:#{map-get($setting, maxWidth)};
-
-        } @else {
-            @screen #{$breakpoint} {
-                padding-left:#{map-get($setting, offset)};
-                padding-right:#{map-get($setting, offset)};
-                max-width:#{map-get($setting, maxWidth)};
-            }
-        }
-      
-    }
-    
-    &--full {
-        max-width:100%;
-    }
+	&--full {
+		max-width: 100%;
+	}
 }
 
 @responsive {
+	.row {
+		display: flex;
+		flex-wrap: wrap;
+		flex-grow: 1;
+		min-width: 0;
 
-    .row {
-        display: flex;
-        flex-wrap:wrap;
-        flex-grow: 1;
-    
-        margin-left:rem(-8px);
-        margin-right:rem(-8px);
-        @screen md {
-            margin-left:rem(-16px);
-            margin-right:rem(-16px);
-        }
+		margin-left: rem(-8px);
+		margin-right: rem(-8px);
+		@screen md {
+			margin-left: rem(-16px);
+			margin-right: rem(-16px);
+		}
 
-        @each $breakpoint, $setting in $settings {
-     
-            @if($breakpoint == 'root') {
-             margin-left:calc(#{map-get($setting, gutter)}/2 * -1);
-             margin-right:calc(#{map-get($setting, gutter)}/2 * -1);
-    
-            } @else {
-                @screen #{$breakpoint} {
-                    margin-left:calc(#{map-get($setting, gutter)}/2 * -1);
-                    margin-right:calc(#{map-get($setting, gutter)}/2 * -1);
-                }
-            }
-          
-        }
-    }
+		@each $breakpoint, $setting in $settings {
+			@if ($breakpoint == 'root') {
+				margin-left: calc(#{map-get($setting, gutter)}/ 2 * -1);
+				margin-right: calc(#{map-get($setting, gutter)}/ 2 * -1);
+			} @else {
+				@screen #{$breakpoint} {
+					margin-left: calc(#{map-get($setting, gutter)}/ 2 * -1);
+					margin-right: calc(#{map-get($setting, gutter)}/ 2 * -1);
+				}
+			}
+		}
+	}
 }
 
 .col {
-    @each $breakpoint, $setting in $settings {
-     
-        @if($breakpoint == 'root') {
-         padding-left:calc(#{map-get($setting, gutter)}/2);
-         padding-right:calc(#{map-get($setting, gutter)}/2);
-
-        } @else {
-            @screen #{$breakpoint} {
-                padding-left:calc(#{map-get($setting, gutter)}/2);
-                padding-right:calc(#{map-get($setting, gutter)}/2);
-            }
-        }
-      
-    }
+	@each $breakpoint, $setting in $settings {
+		@if ($breakpoint == 'root') {
+			padding-left: calc(#{map-get($setting, gutter)}/ 2);
+			padding-right: calc(#{map-get($setting, gutter)}/ 2);
+		} @else {
+			@screen #{$breakpoint} {
+				padding-left: calc(#{map-get($setting, gutter)}/ 2);
+				padding-right: calc(#{map-get($setting, gutter)}/ 2);
+			}
+		}
+	}
 }
 
 .debug {
-    &:before {
-        position: fixed;
-        left:0;
-        bottom:0;
-        padding:10px 15px;
-        line-height: 1;
-        background:#0091F1;
-        z-index: 9999;
-        font-size:10/16 * 1rem;
-        cursor: pointer;
-        
-        content: 'sm';
+	&:before {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		padding: 10px 15px;
+		line-height: 1;
+		background: orange;
+		color: black;
+		z-index: 9999;
+		font-size: 10/16 * 1rem;
+		cursor: pointer;
 
-        @screen md {
-            content: 'md';
-        }
+		content: 'root';
 
-        @screen lg {
-            content: 'lg';
-        }
+		@screen sm {
+			content: 'sm';
+		}
 
-        @screen xl {
-            content: 'xl';
-        }
+		@screen md {
+			content: 'md';
+		}
 
-        @screen display {
-            content: 'Display';
-        } 
-    }
+		@screen lg {
+			content: 'lg';
+		}
 
-      /* Helper variables */
-    --repeating-width: calc(100% / var(--columns));
-    --column-width: calc((100% / var(--columns)) - var(--gutter));
-    --background-width: calc(100% + var(--gutter));
-    --background-columns: repeating-linear-gradient(
-        to right,
-        var(--color),
-        var(--color) var(--column-width),
-        transparent var(--column-width),
-        transparent var(--repeating-width)
-    );
- 
-    
-    &.grid {
-        &:after {
-            position: fixed;
-            top:0;
-            left:0;
-            right:0;
-            margin:auto;
-            width: calc(100% - (2 * var(--offset)));
-            max-width: var(--max_width);
-            height:100%;
-            z-index: 9999;
-            content: '';
-            background-image: var(--background-columns);  
-            background-size: var(--background-width) 100%;
-            pointer-events: none;
-        }
-    }
+		@screen xl {
+			content: 'xl';
+		}
 
+		@screen display {
+			content: 'Display';
+		}
+	}
+
+	/* Helper variables */
+	--repeating-width: calc(100% / var(--columns));
+	--column-width: calc((100% / var(--columns)) - var(--gutter));
+	--background-width: calc(100% + var(--gutter));
+	--background-columns: repeating-linear-gradient(
+		to right,
+		var(--color),
+		var(--color) var(--column-width),
+		transparent var(--column-width),
+		transparent var(--repeating-width)
+	);
+
+	&.grid {
+		&:after {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+			width: calc(100% - (2 * var(--offset)));
+			max-width: var(--max_width);
+			height: 100%;
+			z-index: 9999;
+			content: '';
+			background-image: var(--background-columns);
+			background-size: var(--background-width) 100%;
+			pointer-events: none;
+		}
+	}
 }

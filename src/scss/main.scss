@@ -2,13 +2,22 @@
 
 @tailwind base;
 
+/* purgecss start ignore */
 @import './common/font.scss';
 @import './common/global.scss';
+@import './common/scroll.scss';
 @import './common/grid.scss';
 @import './common/richtext.scss';
+/* purgecss end ignore */
 
 @tailwind components;
 
+/* purgecss start ignore */
 @import './components/image.scss';
+/* purgecss end ignore */
 
 @tailwind utilities;
+
+/* purgecss start ignore */
+@import './utils/utils.scss';
+/* purgecss end ignore */

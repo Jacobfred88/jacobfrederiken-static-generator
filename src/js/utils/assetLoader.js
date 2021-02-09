@@ -35,44 +35,33 @@ const AssetLoader = {
 	addMedia() {
 		const images = this.element.querySelectorAll('img');
 		for (let i = 0; i < images.length; i++) {
-			this.promisesToLoad.push(
-				new Promise((resolve) => {
-					const imgEl = document.createElement('img');
-					imgEl.addEventListener('load', resolve);
-					imgEl.addEventListener('error', resolve);
-					imgEl.src = images[i].src;
-				})
-			);
+			if (!images[i].hasAttribute('data-lazy')) {
+				this.promisesToLoad.push(
+					new Promise((resolve) => {
+						const imgEl = document.createElement('img');
+						imgEl.addEventListener('load', resolve);
+						imgEl.addEventListener('error', resolve);
+						imgEl.src = images[i].src;
+					})
+				);
+			}
 		}
 
 		const videos = this.element.querySelectorAll('video');
+
 		for (let i = 0; i < videos.length; i++) {
-			this.promisesToLoad.push(
-				new Promise((resolve) => {
-					const videoEl = document.createElement('video');
-					videoEl.addEventListener('loadedmetadata', resolve);
-					videoEl.addEventListener('error', resolve);
-					videoEl.src = videos[i].src;
-				})
-			);
+			if (!videos[i].hasAttribute('data-lazy')) {
+				this.promisesToLoad.push(
+					new Promise((resolve) => {
+						const videoEl = document.createElement('video');
+						videoEl.addEventListener('canplaythrough', resolve);
+						videoEl.addEventListener('error', resolve);
+						videoEl.src = videos[i].src;
+						videoEl.load();
+					})
+				);
+			}
 		}
-
-		// const planes = window.curtains.planes;
-
-		// for( let i = 0; i < planes.length; i++ ) {
-		//     this.promisesToLoad.push( new Promise( resolve => {
-
-		//         planes[i].onReady(() => {
-		//             requestAnimationFrame(() => {
-		//                 requestAnimationFrame(() => {
-
-		//                     console.log('assets ready!');
-		//                     resolve();
-		//                 });
-		//             })
-		//         });
-		//     }));
-		// }
 
 		// TODO: check background images
 	},
