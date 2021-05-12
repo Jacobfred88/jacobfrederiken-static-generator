@@ -21,7 +21,7 @@
     "parcel-bundler": "^1.1.0",
     "parcel-plugin-bundle-manifest": "^0.2.0",
     "parcel-plugin-nunjucks": "^2.2.1",
-    "postcss": "^8.1.10",
+    "postcss": "^8.2.10",
     "prettier": "^2.1.2",
     "quicklink": "^2.0.0",
     "tailwindcss": "^2.0.1",
